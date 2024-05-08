@@ -39,9 +39,9 @@ class _Home_PageState extends State<Home_Page> {
 
                               _auth.signOut();
 
-                              Get.to(() => Splash_Screen());
+                              Get.to(() => const Splash_Screen());
                             },
-                            leading: Icon(
+                            leading: const Icon(
                               Icons.logout,
                               size: 40,
                             ),

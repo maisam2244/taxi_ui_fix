@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taxiassist/Model/User_Model/usermodel.dart';
-import 'package:taxiassist/View/Authentication/Login/login.dart';
 import 'package:taxiassist/View/Authentication/Register/phone.dart';
 import 'package:taxiassist/View/Home_screen/Home_page.dart';
 
@@ -26,8 +25,8 @@ class AuthServiceUserLogin {
       GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
 
       AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       UserCredential userCredential =
@@ -58,7 +57,7 @@ class AuthServiceUserLogin {
         // Go to HomePage
         print("Log In Successful!");
 
-        Get.to(() => Home_Page());
+        Get.to(() => const Home_Page());
       }
     } catch (error) {
       print("Error signing in with Google: $error");
@@ -85,8 +84,8 @@ class AuthServiceUserRegister {
       GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
 
       AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       UserCredential userCredential =

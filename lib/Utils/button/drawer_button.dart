@@ -19,7 +19,7 @@ class MyDrawerButton extends StatelessWidget {
           width: 200,
           height: 50,
           decoration: BoxDecoration(
-            color: AppColors.purpleColor,
+            color: AppColors.litepurplecolor,
             borderRadius: BorderRadius.circular(30),
             
           ),

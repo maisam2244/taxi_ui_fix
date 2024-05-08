@@ -1,26 +1,42 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:taxiassist/Utils/app_color/app_colors.dart';
 import 'package:taxiassist/Utils/button/map_button.dart';
 import 'package:taxiassist/Utils/button/round_button.dart';
 import 'package:taxiassist/Utils/textfield/text_fields.dart';
 import 'package:taxiassist/View/Home_screen/Customer_location_numbers/customer_location_numbers.dart';
 
+class LocationPage extends StatefulWidget {
+  String driver_name;
+  String location_adrress;
+  String number_of_passengers;
+  String Latitude;
+  String Longitude ;
 
-class GoogleMaps extends StatefulWidget {
-  const GoogleMaps({super.key});
+  LocationPage({
+    Key? key,
+    required this.driver_name,
+    required this.location_adrress,
+    required this.number_of_passengers,
+    required this.Latitude,
+    required this. Longitude,
+  }) : super(key: key);
 
   @override
-  State<GoogleMaps> createState() => _GoogleMapsState();
+  State<LocationPage> createState() => _LocationPageState();
 }
 
-class _GoogleMapsState extends State<GoogleMaps> {
+class _LocationPageState extends State<LocationPage> {
   final Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition kGooglePlex = CameraPosition(
     target: LatLng(24.8846, 67.1754),
@@ -34,11 +50,9 @@ class _GoogleMapsState extends State<GoogleMaps> {
         infoWindow: InfoWindow(title: "Current Location".tr))
   ];
   String stAddress = '';
-  String Latitude = " ";
-  String Longitude = " ";  
+  
   TextEditingController num_of_passengers = TextEditingController();
   TextEditingController location_name = TextEditingController();
-  final fireStore = FirebaseFirestore.instance.collection("customers_location_name");
   var dateTime = DateTime.now();
 
   @override
@@ -57,9 +71,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-
+   
     return Scaffold(
       body: SafeArea(
         child: GoogleMap(
@@ -76,7 +88,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
       floatingActionButton: Align(
         alignment: Alignment.bottomCenter,
         child: MapButton(
-          text: "Let others know",
+          text: "Driver Details",
           ontap: () async {
             getUserCurrentLocation().then((value) async {
               print("My Location".tr);
@@ -87,8 +99,7 @@ class _GoogleMapsState extends State<GoogleMaps> {
                   markerId: const MarkerId("2"),
                   position: LatLng(value.latitude, value.longitude),
                   infoWindow: InfoWindow(title: "My Location".tr)));
-              Latitude = value.latitude.toString();
-              Longitude = value.longitude.toString();
+              
         
               List<Placemark> placemarks = await placemarkFromCoordinates(
                   value.latitude, value.longitude);
@@ -115,31 +126,15 @@ class _GoogleMapsState extends State<GoogleMaps> {
                       
                       const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("Share customer's details",style: TextStyle(color: Colors.white,fontSize: 20),),
+                        child: Text("Driver's Details",style: TextStyle(color: Colors.white,fontSize: 20),),
                       ),
-                      const SizedBox(height: 20,),
-                      MyTextField(hintText: "e.g 5", labelText: "Number of passengers", controller: num_of_passengers),
-                      MyTextField(hintText: "Airport", labelText: "Location", controller: location_name),
-                      const SizedBox(height: 20,),
-                      MyButton(ontap: (){
-                        var id = DateTime.now().microsecondsSinceEpoch.toString();
-                        fireStore.add({
-                           "id": id,
-                          "driver_name": user!.displayName,
-                          "num_of_passengers": num_of_passengers.text,
-                          "location_name": location_name.text,
-                          "map_location_address" : stAddress,
-                          "date_time" : dateTime.toString(),
-                          "latitude" : Latitude,
-                          "longitude" : Longitude,
-                        });
-                          Get.snackbar("Success", "Your information has been sent");
-                          Get.to(()=> CustomerLocationNumbers());
-                       
-                          
-                       
-                  
-                      }, text: "SEND")
+
+                      Text(widget.driver_name,style: TextStyle(color: Colors.white,fontSize: 20)),
+                      Text(widget.location_adrress,style: TextStyle(color: Colors.white,fontSize: 20)),
+                      Text(widget.number_of_passengers,style: TextStyle(color: Colors.white,fontSize: 20)),
+                     
+                     
+                      
                     ],
                   ),
                 ),

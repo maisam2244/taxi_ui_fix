@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taxiassist/Model/User_Model/usermodel.dart';
 import 'package:taxiassist/Utils/app_color/app_colors.dart';
 import 'package:taxiassist/Utils/button/round_button.dart';
@@ -86,7 +84,7 @@ class _Login_PageState extends State<Login_Page> {
 
               GestureDetector(
                 onTap: () {
-                  Get.to(() => Register_Page());
+                  Get.to(() => const Register_Page());
                 },
                 child: Text("Don't have an account? Register Now",
                 style: TextStyle(color: AppColors.whiteColor, fontSize: 14),),

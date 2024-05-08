@@ -46,7 +46,7 @@ SizedBox(height: MediaQuery.sizeOf(context).height*0.1,),
 
             SizedBox(height: MediaQuery.sizeOf(context).height*0.08,),
             MyDrawerButton(ontap: (){
-              Get.to(() => GoogleMaps());
+              Get.to(() => const GoogleMaps());
 
             }, text1: "Share information"),
             MyDrawerButton(ontap: (){}, text1: "Train Schedules"),

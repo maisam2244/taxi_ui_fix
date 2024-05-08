@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:taxiassist/Model/User_Model/usermodel.dart';
 import 'package:taxiassist/Utils/app_color/app_colors.dart';
 import 'package:taxiassist/Utils/button/round_button.dart';
-import 'package:taxiassist/View/Authentication/Register/otp.dart';
 
 class Phone extends StatefulWidget {
   const Phone({Key? key, required this.userModel, required this.firebaseUser, required this.targetUser}) : super(key: key);
@@ -33,7 +31,7 @@ class _PhoneState extends State<Phone> {
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       body: Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
+        margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
@@ -49,7 +47,7 @@ class _PhoneState extends State<Phone> {
                   ),
 
 
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
 
@@ -63,7 +61,7 @@ class _PhoneState extends State<Phone> {
                       fontSize: 24,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
@@ -78,7 +76,7 @@ class _PhoneState extends State<Phone> {
 
               
               
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Text(
@@ -89,7 +87,7 @@ class _PhoneState extends State<Phone> {
                   color: AppColors.whiteColor
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
@@ -100,7 +98,7 @@ class _PhoneState extends State<Phone> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -111,7 +109,7 @@ class _PhoneState extends State<Phone> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     SizedBox(
@@ -122,16 +120,16 @@ class _PhoneState extends State<Phone> {
                         ),
                         controller: countryController,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "|",
                       style: TextStyle(fontSize: 33, color: Colors.grey),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Expanded(
@@ -140,7 +138,7 @@ class _PhoneState extends State<Phone> {
                             color: AppColors.whiteColor,
                           ),
                           keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Phone",
                             hintStyle: TextStyle(
@@ -154,7 +152,7 @@ class _PhoneState extends State<Phone> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
@@ -163,7 +161,7 @@ class _PhoneState extends State<Phone> {
                 child: MyButton(
                   ontap: () async {
                     await FirebaseAuth.instance.verifyPhoneNumber(
-                      phoneNumber: '${countryController.text + (widget.userModel.phoneNumber ?? '')}',
+                      phoneNumber: countryController.text + (widget.userModel.phoneNumber ?? ''),
                       verificationCompleted: (PhoneAuthCredential credential) {},
                       verificationFailed: (FirebaseAuthException e) {},
                       codeSent: (String verificationId, int? resendToken) {},

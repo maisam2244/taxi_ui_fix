@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:taxiassist/Model/User_Model/usermodel.dart';
 import 'package:taxiassist/Utils/app_color/app_colors.dart';
 import 'package:taxiassist/Utils/button/round_button.dart';
-import 'package:taxiassist/Utils/textfield/text_fields.dart';
 import 'package:taxiassist/View/Authentication/GoogleAuth/auth_service.dart';
 import 'package:taxiassist/View/Authentication/Login/login.dart';
 
@@ -27,7 +24,7 @@ class  Register_Page extends StatelessWidget {
 
                 SizedBox(height: MediaQuery.of(context).size.height*0.1,),
 
-                Text("Infos taxi App",style: TextStyle(color: Colors.yellow,fontSize: 30, fontWeight: FontWeight.bold),),
+                const Text("Infos taxi App",style: TextStyle(color: Colors.yellow,fontSize: 30, fontWeight: FontWeight.bold),),
                 
                 SizedBox(height: MediaQuery.of(context).size.height*0.1,),
 
@@ -47,7 +44,7 @@ class  Register_Page extends StatelessWidget {
 
                 GestureDetector(
                 onTap: () {
-                  Get.to(() => Login_Page());
+                  Get.to(() => const Login_Page());
                 },
                 child: Text("Already have an account? Login Now",
                 style: TextStyle(color: AppColors.whiteColor, fontSize: 14),),
